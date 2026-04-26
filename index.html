@@ -19,7 +19,7 @@
             background-color: var(--bg); 
             color: white; 
             font-family: 'Pretendard', -apple-system, sans-serif; 
-            margin: 0; padding: 15px; text-align: center; 
+            margin: 0; padding: 20px; text-align: center; 
             overflow-x: hidden;
             position: relative;
             min-height: 100vh;
@@ -66,33 +66,34 @@
             transition: opacity 0.3s ease;
         }
 
-        header { padding: 20px 0 10px; position: relative; z-index: 10; }
+        header { padding: 20px 0 15px; position: relative; z-index: 10; }
         h1 { 
             color: var(--main); margin: 0; font-size: 2.2rem; font-weight: 900; 
             text-shadow: 0 0 25px rgba(0, 255, 136, 0.5); letter-spacing: -0.5px; 
         }
 
         .stats-container {
-            display: flex; justify-content: center; gap: 15px; margin: 20px auto;
-            max-width: 500px; background: rgba(255, 255, 255, 0.02);
+            display: flex; justify-content: center; gap: 15px; margin: 25px auto;
+            max-width: 450px; background: rgba(255, 255, 255, 0.02);
             backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
-            padding: 15px; border-radius: 16px; border: 1px solid var(--card-border);
+            padding: 18px; border-radius: 20px; border: 1px solid var(--card-border);
             box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4), inset 0 1px 0 rgba(255,255,255,0.1);
         }
         .stat-item { flex: 1; }
-        .stat-value { display: block; font-size: 1.5rem; font-weight: 800; color: #fff; text-shadow: 0 0 15px rgba(255, 255, 255, 0.3); }
+        .stat-value { display: block; font-size: 1.6rem; font-weight: 800; color: #fff; text-shadow: 0 0 15px rgba(255, 255, 255, 0.3); }
         .stat-label { font-size: 0.75rem; color: #8892b0; margin-top: 5px; display: block; text-transform: uppercase; letter-spacing: 1px; }
         #friendCount { color: var(--main); text-shadow: 0 0 15px rgba(0, 255, 136, 0.5); }
 
-        /* ✨ 1. 예쁜 네온 검색창 디자인 */
+        /* ✨ 예쁜 네온 검색창 디자인 */
         .search-container {
-            max-width: 350px;
-            margin: 0 auto 20px;
+            max-width: 380px;
+            width: 100%;
+            margin: 0 auto 25px;
             position: relative;
         }
         #searchInput {
             width: 100%;
-            padding: 12px 20px 12px 45px;
+            padding: 14px 20px 14px 45px;
             border-radius: 30px;
             background: rgba(255, 255, 255, 0.04);
             border: 1px solid var(--card-border);
@@ -111,87 +112,80 @@
             background: rgba(255, 255, 255, 0.08);
             box-shadow: 0 0 20px rgba(0, 255, 136, 0.2), inset 0 2px 5px rgba(0,0,0,0.2);
         }
-        /* 돋보기 아이콘 */
         .search-icon {
-            position: absolute; left: 15px; top: 50%; transform: translateY(-50%);
+            position: absolute; left: 18px; top: 50%; transform: translateY(-50%);
             font-size: 1.1rem; pointer-events: none; opacity: 0.6;
         }
 
+        /* ✨ 필터 버튼 깔끔한 정렬 */
         .filter-container { 
             display: flex; flex-wrap: wrap; justify-content: center; gap: 8px; 
-            max-width: 800px; margin: 0 auto 30px; position: relative; z-index: 10; 
+            max-width: 700px; margin: 0 auto 35px; position: relative; z-index: 10; 
         }
         .filter-btn {
             background: var(--card-bg); border: 1px solid var(--card-border); color: #8892b0; 
-            padding: 8px 16px; border-radius: 10px; font-size: 0.95rem; font-weight: 600; cursor: pointer; 
+            padding: 8px 18px; border-radius: 20px; font-size: 0.95rem; font-weight: 600; cursor: pointer; 
             transition: all 0.3s cubic-bezier(0.25, 1, 0.5, 1);
             backdrop-filter: blur(5px); -webkit-backdrop-filter: blur(5px);
         }
-        .filter-btn:hover { border-color: rgba(0, 255, 136, 0.5); color: white; transform: translateY(-3px); box-shadow: 0 5px 15px rgba(0,0,0,0.3); }
+        .filter-btn:hover { border-color: rgba(0, 255, 136, 0.5); color: white; transform: translateY(-2px); box-shadow: 0 5px 10px rgba(0,0,0,0.2); }
         .filter-btn.active { 
             background: rgba(0, 255, 136, 0.15); color: var(--main); 
-            border-color: var(--main); box-shadow: 0 0 20px rgba(0,255,136,0.3); 
+            border-color: var(--main); box-shadow: 0 0 15px rgba(0,255,136,0.3); 
         }
 
-        /* 3열 배치 고정 */
+        /* ✨ 반응형 그리드 (카드 크기 유지하며 자동 줄바꿈) */
         .grid { 
             display: grid; 
-            grid-template-columns: repeat(3, 1fr); 
+            grid-template-columns: repeat(auto-fill, minmax(110px, 1fr)); 
             gap: 15px; 
+            max-width: 900px;
+            margin: 0 auto 50px auto;
             position: relative; 
             z-index: 5; 
-            perspective: 1000px; 
         }
         
-        /* 3D 카드 디자인 */
+        /* ✨ 심플하고 세련된 카드 디자인 (3D 제거) */
         .card { 
-            background: linear-gradient(145deg, rgba(255,255,255,0.05) 0%, rgba(255,255,255,0.01) 100%);
-            padding: 20px 2px; border-radius: 16px; 
+            background: linear-gradient(145deg, rgba(255,255,255,0.06) 0%, rgba(255,255,255,0.01) 100%);
+            padding: 22px 10px; border-radius: 18px; 
             border: 1px solid var(--card-border); 
             backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
-            box-shadow: 0 4px 20px rgba(0,0,0,0.3); 
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2); 
             cursor: pointer; position: relative;
             user-select: none; -webkit-tap-highlight-color: transparent;
-            transform-style: preserve-3d;
-            transform: perspective(1000px) rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1);
-            transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1), border-color 0.3s, box-shadow 0.3s;
+            transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
         }
-        .card::before {
-            content: ''; position: absolute; top: 0; left: 0; right: 0; bottom: 0;
-            border-radius: inherit;
-            background: radial-gradient(circle at var(--px, 50%) var(--py, 50%), rgba(255,255,255,0.15) 0%, transparent 60%);
-            opacity: 0; transition: opacity 0.3s ease; z-index: 0; pointer-events: none;
-        }
-        .card:hover::before { opacity: 1; }
         .card:hover { 
+            transform: translateY(-5px); /* 마우스 올렸을 때 살짝 위로 떠오르는 깔끔한 효과 */
             border-color: rgba(0, 255, 136, 0.4); 
-            box-shadow: 0 15px 30px rgba(0, 255, 136, 0.1), 0 5px 15px rgba(0,0,0,0.4);
+            box-shadow: 0 10px 25px rgba(0, 255, 136, 0.15), 0 5px 15px rgba(0,0,0,0.3);
         }
 
         /* 스태거 슬라이드 업 애니메이션 */
         .card.slide-up { animation: slideUpAnim 0.6s cubic-bezier(0.2, 0.8, 0.2, 1) both; }
         @keyframes slideUpAnim {
-            0% { opacity: 0; transform: translateY(50px) scale(0.9); }
+            0% { opacity: 0; transform: translateY(30px) scale(0.95); }
             100% { opacity: 1; transform: translateY(0) scale(1); }
         }
 
-        /* 클릭 시 네온 파동 */
+        /* 클릭 시 네온 파동 (평면 기반으로 수정) */
         .card.neon-pulse { animation: neon-click-anim 0.5s cubic-bezier(0.25, 1, 0.5, 1) forwards; }
         @keyframes neon-click-anim {
             0% { transform: scale(0.95); box-shadow: 0 0 20px var(--main), inset 0 0 15px var(--main); border-color: var(--main); background: rgba(0, 255, 136, 0.2); }
-            50% { transform: scale(1.03); box-shadow: 0 0 40px var(--main), inset 0 0 10px var(--main); background: rgba(0, 255, 136, 0.1); }
-            100% { transform: scale(1); box-shadow: 0 4px 20px rgba(0,0,0,0.3); border-color: var(--card-border); }
+            50% { transform: scale(1.02); box-shadow: 0 0 30px var(--main), inset 0 0 10px var(--main); background: rgba(0, 255, 136, 0.1); }
+            100% { transform: scale(1); box-shadow: 0 4px 15px rgba(0,0,0,0.2); border-color: var(--card-border); }
         }
 
         .name { 
-            font-weight: 700; font-size: 1rem; color: #fff; letter-spacing: 0.5px; 
+            font-weight: 700; font-size: 1.05rem; color: #fff; letter-spacing: 0.5px; 
             display: block; pointer-events: none; word-break: keep-all;
-            transform: translateZ(20px); position: relative; z-index: 2;
+            position: relative; z-index: 2;
         }
         .tag { 
-            font-size: 1.5rem; margin-top: 10px; display: block; pointer-events: none; 
-            filter: drop-shadow(0 4px 8px rgba(0,0,0,0.4));
-            transform: translateZ(35px); position: relative; z-index: 2;
+            font-size: 1.6rem; margin-top: 12px; display: block; pointer-events: none; 
+            filter: drop-shadow(0 4px 6px rgba(0,0,0,0.3));
+            position: relative; z-index: 2;
         }
 
     </style>
@@ -362,7 +356,7 @@
         let currentCho = '전체';
         let currentSearch = '';
 
-        /* ✨ 1. 카드 랜덤 섞기 함수 */
+        /* 1. 카드 랜덤 섞기 함수 */
         function shuffleCards() {
             const grid = document.getElementById('friendGrid');
             const cards = Array.from(grid.children);
@@ -404,7 +398,7 @@
             document.getElementById('friendCount').innerText = visibleCount;
         }
 
-        /* ✨ 3. 검색창 입력 이벤트 */
+        /* 3. 검색창 입력 이벤트 */
         document.getElementById('searchInput').addEventListener('input', function(e) {
             currentSearch = e.target.value.trim();
             
@@ -433,34 +427,10 @@
             });
         });
 
-        /* 3D 카드 틸트(기울기) & 반사광(Glare) 로직 */
+        /* 카드 상호작용 (Tilt 제거 후 클릭 효과만 유지) */
         document.querySelectorAll('.card').forEach(card => {
             let clickCount = 0;
             let clickTimer;
-
-            card.addEventListener('mousemove', (e) => {
-                card.style.transition = 'transform 0.1s ease-out, border-color 0.3s, box-shadow 0.3s';
-                const rect = card.getBoundingClientRect();
-                const x = e.clientX - rect.left; 
-                const y = e.clientY - rect.top;  
-                
-                card.style.setProperty('--px', `${x}px`);
-                card.style.setProperty('--py', `${y}px`);
-
-                const centerX = rect.width / 2;
-                const centerY = rect.height / 2;
-                const rotateX = ((y - centerY) / centerY) * -12; 
-                const rotateY = ((x - centerX) / centerX) * 12;
-
-                card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale3d(1.05, 1.05, 1.05)`;
-            });
-
-            card.addEventListener('mouseleave', () => {
-                card.style.transition = 'transform 0.5s cubic-bezier(0.25, 1, 0.5, 1), border-color 0.3s, box-shadow 0.3s';
-                card.style.transform = `perspective(1000px) rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1)`;
-                card.style.setProperty('--px', `50%`);
-                card.style.setProperty('--py', `50%`);
-            });
 
             card.addEventListener('click', function(e) {
                 card.classList.remove('neon-pulse');
@@ -526,7 +496,7 @@
             }
         }, { passive: true });
 
-        /* ✨ 페이지 로드 시 실행 (셔플 후 렌더링) */
+        /* 페이지 로드 시 실행 (셔플 후 렌더링) */
         window.onload = () => {
             shuffleCards();
             applyFilters();
