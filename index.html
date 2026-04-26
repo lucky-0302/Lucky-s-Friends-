@@ -5,21 +5,42 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Lucky's Friends</title>
     <style>
-        :root { --main: #00ff88; --bg: #121212; --card: #1e1e1e; }
+        :root { --main: #00ff88; --bg: #121212; --card: #1e1e1e; --click: #00cc6e; }
         body { background: var(--bg); color: white; font-family: 'Pretendard', sans-serif; margin: 0; padding: 20px; text-align: center; }
         header { padding: 40px 0; border-bottom: 1px solid #333; }
-        h1 { color: var(--main); margin: 0; font-size: 2.2rem; letter-spacing: -1px; }
+        h1 { color: var(--main); margin: 0; font-size: 2.2rem; letter-spacing: -1px; text-shadow: 0 0 10px rgba(0, 255, 136, 0.3); }
+        
         .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(100px, 1fr)); gap: 10px; margin-top: 30px; }
-        .card { background: var(--card); padding: 15px 5px; border-radius: 12px; border: 1px solid #333; box-shadow: 0 4px 6px rgba(0,0,0,0.3); transition: transform 0.2s; }
-        .card:hover { transform: translateY(-5px); border-color: var(--main); box-shadow: 0 0 15px rgba(0, 255, 136, 0.2); }
+        
+        /* 카드 기본 스타일 */
+        .card { 
+            background: var(--card); padding: 15px 5px; border-radius: 12px; border: 1px solid #333; 
+            box-shadow: 0 4px 6px rgba(0,0,0,0.3); transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1); 
+            cursor: pointer; user-select: none; -webkit-tap-highlight-color: transparent;
+        }
+
+        /* 마우스 올렸을 때 (Hover) */
+        .card:hover { 
+            transform: translateY(-5px); border-color: var(--main); 
+            box-shadow: 0 5px 15px rgba(0, 255, 136, 0.3); 
+        }
+
+        /* ★ 클릭했을 때 이펙트 (Active) ★ */
+        .card:active { 
+            transform: scale(0.92); /* 살짝 눌리는 효과 */
+            background: rgba(0, 255, 136, 0.1); /* 배경에 아주 연한 초록빛 */
+            border-color: var(--main);
+            box-shadow: 0 0 20px var(--main); /* 강렬한 초록색 네온광 */
+        }
+
         .name { font-weight: bold; font-size: 0.95rem; display: block; color: #fff; }
         .tag { font-size: 1.1rem; margin-top: 8px; display: block; }
     </style>
 </head>
 <body>
     <header>
-        <h1>🍀Lucky's Friends🍀</h1>
-        <p style="color: #888; font-size: 0.9rem;">짱짱럭키의 지인입니다🤣</p>
+        <h1>🍀 Lucky's Friends</h1>
+        <p style="color: #888; font-size: 0.9rem;">클릭하면 빛나는 100명의 인연</p>
     </header>
     <div class="grid">
         <div class="card"><span class="name">가람</span><span class="tag">🌊</span></div>
@@ -35,14 +56,14 @@
         <div class="card"><span class="name">네코</span><span class="tag">🍙</span></div>
         <div class="card"><span class="name">네온</span><span class="tag">🔋</span></div>
         <div class="card"><span class="name">노아</span><span class="tag">⛵</span></div>
-        <div class="card"><span class="name">다오</span><span class="tag">☀️</span></div>
+        <div class="card"><span class="name">다온</span><span class="tag">☀️</span></div>
         <div class="card"><span class="name">다이브</span><span class="tag">🌊</span></div>
         <div class="card"><span class="name">델타</span><span class="tag">⚡</span></div>
         <div class="card"><span class="name">도윤</span><span class="tag">🌠</span></div>
         <div class="card"><span class="name">드럼통</span><span class="tag">🛢️</span></div>
         <div class="card"><span class="name">라떼</span><span class="tag">☕</span></div>
         <div class="card"><span class="name">라운</span><span class="tag">📜</span></div>
-        <div class="card"><span class="name">레이어</span><span class="tag"> pancake</span></div>
+        <div class="card"><span class="name">레이어</span><span class="tag">🥞</span></div>
         <div class="card"><span class="name">로아</span><span class="tag">💎</span></div>
         <div class="card"><span class="name">로그</span><span class="tag">📂</span></div>
         <div class="card"><span class="name">루비</span><span class="tag">🍎</span></div>
@@ -118,7 +139,7 @@
         <div class="card"><span class="name">핑크</span><span class="tag">💖</span></div>
         <div class="card"><span class="name">하람</span><span class="tag">🌤️</span></div>
         <div class="card"><span class="name">하린</span><span class="tag">🐰</span></div>
-        <div class="card"><span class="name">하준</span><span class="tag">🛹</span></div>
+        <div class="card"><span class="name">하준</span><span class="tag"> skateboard</span></div>
         <div class="card"><span class="name">하츠</span><span class="tag">❤️</span></div>
         <div class="card"><span class="name">헤이즈</span><span class="tag">🌫️</span></div>
         <div class="card"><span class="name">혜린</span><span class="tag">🌷</span></div>
