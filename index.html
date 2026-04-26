@@ -3,35 +3,47 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Lucky's Friends</title>
+    <title>Lucky's Friends!</title>
     <style>
-        :root { --main: #00ff88; --bg: #121212; --card: #1e1e1e; --click: #00cc6e; }
-        body { background: var(--bg); color: white; font-family: 'Pretendard', sans-serif; margin: 0; padding: 20px; text-align: center; }
-        header { padding: 40px 0; border-bottom: 1px solid #333; }
-        h1 { color: var(--main); margin: 0; font-size: 2.2rem; letter-spacing: -1px; text-shadow: 0 0 10px rgba(0, 255, 136, 0.3); }
+        :root { --main: #00ff88; --bg: #0a0a0a; --card: #161616; }
         
-        .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(100px, 1fr)); gap: 10px; margin-top: 30px; }
+        body { 
+            background: var(--bg); color: white; font-family: 'Pretendard', sans-serif; 
+            margin: 0; padding: 20px; text-align: center; overflow-x: hidden;
+            position: relative;
+        }
+
+        /* 배경 애니메이션 */
+        body::before {
+            content: ""; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: radial-gradient(circle at center, transparent 0%, var(--bg) 100%),
+                        url('https://www.transparenttextures.com/patterns/stardust.png');
+            opacity: 0.3; z-index: -1; animation: moveBg 50s linear infinite;
+        }
+        @keyframes moveBg { from { background-position: 0 0; } to { background-position: 0 1000px; } }
+
+        header { padding: 40px 0; }
+        h1 { color: var(--main); margin: 0; font-size: 2.2rem; text-shadow: 0 0 15px rgba(0, 255, 136, 0.5); }
+
+        .stats-container {
+            display: flex; justify-content: center; gap: 20px; margin: 20px auto;
+            max-width: 500px; background: rgba(255, 255, 255, 0.05);
+            padding: 15px; border-radius: 15px; border: 1px solid #333;
+        }
+        .stat-item { flex: 1; }
+        /* 숫자가 들어갈 자리에 ID(friendCount)를 줬어요 */
+        .stat-value { display: block; font-size: 1.5rem; font-weight: bold; color: var(--main); }
+        .stat-label { font-size: 0.8rem; color: #888; }
+
+        .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(100px, 1fr)); gap: 10px; margin-top: 30px; position: relative; }
         
-        /* 카드 기본 스타일 */
         .card { 
             background: var(--card); padding: 15px 5px; border-radius: 12px; border: 1px solid #333; 
             box-shadow: 0 4px 6px rgba(0,0,0,0.3); transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1); 
-            cursor: pointer; user-select: none; -webkit-tap-highlight-color: transparent;
+            cursor: pointer; backdrop-filter: blur(5px);
         }
-
-        /* 마우스 올렸을 때 (Hover) */
-        .card:hover { 
-            transform: translateY(-5px); border-color: var(--main); 
-            box-shadow: 0 5px 15px rgba(0, 255, 136, 0.3); 
-        }
-
-        /* ★ 클릭했을 때 이펙트 (Active) ★ */
-        .card:active { 
-            transform: scale(0.92); /* 살짝 눌리는 효과 */
-            background: rgba(0, 255, 136, 0.1); /* 배경에 아주 연한 초록빛 */
-            border-color: var(--main);
-            box-shadow: 0 0 20px var(--main); /* 강렬한 초록색 네온광 */
-        }
+        .card:hover { transform: translateY(-5px); border-color: var(--main); box-shadow: 0 5px 15px rgba(0, 255, 136, 0.3); }
+        .card:active { transform: scale(0.92); background: rgba(0, 255, 136, 0.1); border-color: var(--main); box-shadow: 0 0 20px var(--main); }
 
         .name { font-weight: bold; font-size: 0.95rem; display: block; color: #fff; }
         .tag { font-size: 1.1rem; margin-top: 8px; display: block; }
@@ -39,10 +51,25 @@
 </head>
 <body>
     <header>
-        <h1>🍀 Lucky's Friends</h1>
-        <p style="color: #888; font-size: 0.9rem;">클릭하면 빛나는 100명의 인연</p>
+        <h1>Lucky's Friends!🍀</h1>
+        
+        <div class="stats-container">
+            <div class="stat-item">
+                <span class="stat-value" id="friendCount">0</span>
+                <span class="stat-label">Total Friends</span>
+            </div>
+            <div class="stat-item" style="border-left: 1px solid #333; border-right: 1px solid #333;">
+                <span class="stat-value">Online</span>
+                <span class="stat-label">24/7 Active</span>
+            </div>
+            <div class="stat-item">
+                <span class="stat-value" id="updateDate">V1.5</span>
+                <span class="stat-label">Version</span>
+            </div>
+        </div>
     </header>
-    <div class="grid">
+
+    <div class="grid" id="friendGrid">
         <div class="card"><span class="name">가람</span><span class="tag">🌊</span></div>
         <div class="card"><span class="name">가째</span><span class="tag">😎</span></div>
         <div class="card"><span class="name">강우</span><span class="tag">🔥</span></div>
@@ -139,7 +166,7 @@
         <div class="card"><span class="name">핑크</span><span class="tag">💖</span></div>
         <div class="card"><span class="name">하람</span><span class="tag">🌤️</span></div>
         <div class="card"><span class="name">하린</span><span class="tag">🐰</span></div>
-        <div class="card"><span class="name">하준</span><span class="tag"> skateboard</span></div>
+        <div class="card"><span class="name">하준</span><span class="tag">🛹</span></div>
         <div class="card"><span class="name">하츠</span><span class="tag">❤️</span></div>
         <div class="card"><span class="name">헤이즈</span><span class="tag">🌫️</span></div>
         <div class="card"><span class="name">혜린</span><span class="tag">🌷</span></div>
@@ -147,5 +174,14 @@
         <div class="card"><span class="name">흑우</span><span class="tag">🐂</span></div>
         <div class="card"><span class="name">흑타냥</span><span class="tag">🎩</span></div>
     </div>
+
+    <script>
+        function updateStats() {
+            const count = document.querySelectorAll('.card').length;
+            document.getElementById('friendCount').innerText = count;
+        }
+        // 페이지가 로드될 때 실행
+        window.onload = updateStats;
+    </script>
 </body>
 </html>
