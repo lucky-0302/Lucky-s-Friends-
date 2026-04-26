@@ -7,58 +7,55 @@
     <style>
         :root { 
             --main: #00ff88; 
-            /* 비오는 밤 느낌의 다크 블루/그레이 배경 */
             --bg: #0b0d14; 
-            /* 반투명한 유리 느낌의 카드 */
             --card-bg: rgba(255, 255, 255, 0.03); 
             --card-border: rgba(255, 255, 255, 0.1);
         }
         
         body { 
             background: var(--bg); color: white; font-family: 'Pretendard', -apple-system, sans-serif; 
-            margin: 0; padding: 20px; text-align: center; overflow-x: hidden;
+            margin: 0; padding: 15px; text-align: center; overflow-x: hidden;
             position: relative;
             min-height: 100vh;
         }
 
-        /* 🌧️ 세련된 대각선 비(Rain) 효과 */
+        /* ✨ 공중에 흩날리는 먼지(빛 입자) 효과 */
         body::before {
-            content: ""; position: fixed; top: -50%; left: -50%; width: 200%; height: 200%;
+            content: ""; position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
             background-image: 
-                linear-gradient(to bottom, rgba(255,255,255,0) 0%, rgba(255,255,255,0.15) 50%, rgba(255,255,255,0) 100%),
-                linear-gradient(to bottom, rgba(255,255,255,0) 0%, rgba(255,255,255,0.08) 50%, rgba(255,255,255,0) 100%);
-            background-size: 1px 120px, 2px 200px;
-            /* 비가 내리는 각도 설정 */
-            transform: rotate(15deg); 
-            opacity: 0.6; z-index: -1; pointer-events: none;
-            animation: rainDrop 0.7s linear infinite;
+                radial-gradient(circle, rgba(255,255,255,0.2) 1px, transparent 2px),
+                radial-gradient(circle, rgba(255,255,255,0.1) 1.5px, transparent 2px),
+                radial-gradient(circle, rgba(255,255,255,0.05) 2px, transparent 3px);
+            background-size: 100px 100px, 150px 150px, 200px 200px;
+            background-position: 0 0, 40px 60px, 130px 20px;
+            z-index: -1; pointer-events: none;
+            /* 위로 부드럽게 날아가는 애니메이션 */
+            animation: dustDrift 25s linear infinite; 
         }
-        @keyframes rainDrop {
-            0% { background-position: 0 0, 50px 0; }
-            100% { background-position: 0 1000px, 50px 1500px; }
+        @keyframes dustDrift {
+            0% { background-position: 0 0, 40px 60px, 130px 20px; }
+            100% { background-position: 100px -100px, 190px -90px, 330px -180px; }
         }
 
-        header { padding: 30px 0; position: relative; z-index: 1; }
-        h1 { color: var(--main); margin: 0; font-size: 2.4rem; font-weight: 800; text-shadow: 0 0 20px rgba(0, 255, 136, 0.4); letter-spacing: -0.5px; }
+        header { padding: 20px 0; position: relative; z-index: 1; }
+        h1 { color: var(--main); margin: 0; font-size: 2.2rem; font-weight: 800; text-shadow: 0 0 20px rgba(0, 255, 136, 0.4); letter-spacing: -0.5px; }
 
-        /* 통계 컨테이너 유리 질감 적용 */
         .stats-container {
-            display: flex; justify-content: center; gap: 20px; margin: 25px auto;
+            display: flex; justify-content: center; gap: 15px; margin: 20px auto;
             max-width: 500px; background: var(--card-bg);
             backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
-            padding: 15px; border-radius: 16px; border: 1px solid var(--card-border);
+            padding: 12px; border-radius: 14px; border: 1px solid var(--card-border);
             box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
         }
         .stat-item { flex: 1; }
-        .stat-value { display: block; font-size: 1.6rem; font-weight: bold; color: var(--main); text-shadow: 0 0 10px rgba(0, 255, 136, 0.3); }
-        .stat-label { font-size: 0.8rem; color: #a0a0a0; margin-top: 4px; display: block; }
+        .stat-value { display: block; font-size: 1.4rem; font-weight: bold; color: var(--main); text-shadow: 0 0 10px rgba(0, 255, 136, 0.3); }
+        .stat-label { font-size: 0.75rem; color: #a0a0a0; margin-top: 4px; display: block; }
 
-        /* 🔍 초성 필터 버튼 스타일 */
-        .filter-container { display: flex; flex-wrap: wrap; justify-content: center; gap: 8px; max-width: 800px; margin: 0 auto 30px; position: relative; z-index: 1; }
+        .filter-container { display: flex; flex-wrap: wrap; justify-content: center; gap: 6px; max-width: 800px; margin: 0 auto 25px; position: relative; z-index: 1; }
         .filter-btn {
             background: var(--card-bg); border: 1px solid var(--card-border); color: #ccc; 
-            padding: 8px 16px; border-radius: 10px; font-size: 0.95rem; cursor: pointer; 
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            padding: 6px 12px; border-radius: 8px; font-size: 0.9rem; cursor: pointer; 
+            transition: all 0.3s ease;
             backdrop-filter: blur(5px); -webkit-backdrop-filter: blur(5px);
         }
         .filter-btn:hover { border-color: var(--main); color: white; transform: translateY(-2px); }
@@ -67,11 +64,17 @@
             border-color: var(--main); box-shadow: 0 0 15px rgba(0,255,136,0.3); 
         }
 
-        .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(110px, 1fr)); gap: 12px; position: relative; z-index: 1; }
+        /* 📱 무조건 3줄(3열)로 나오도록 고정 */
+        .grid { 
+            display: grid; 
+            grid-template-columns: repeat(3, 1fr); 
+            gap: 10px; 
+            position: relative; 
+            z-index: 1; 
+        }
         
-        /* 🌊 카드 글래스모피즘 & 부드러운 호버 효과 */
         .card { 
-            background: var(--card-bg); padding: 18px 5px; border-radius: 14px; 
+            background: var(--card-bg); padding: 15px 2px; border-radius: 12px; 
             border: 1px solid var(--card-border); 
             backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
             box-shadow: 0 4px 15px rgba(0,0,0,0.2); 
@@ -86,18 +89,17 @@
             box-shadow: 0 8px 25px rgba(0, 255, 136, 0.15);
         }
         
-        /* ⚡ 네온 클릭 애니메이션 (파동 대신 적용) */
-        .card.neon-pulse {
-            animation: neon-click-anim 0.4s ease-out forwards;
-        }
+        /* ⚡ 네온 클릭 애니메이션 */
+        .card.neon-pulse { animation: neon-click-anim 0.4s ease-out forwards; }
         @keyframes neon-click-anim {
             0% { transform: scale(0.92); box-shadow: 0 0 20px var(--main), inset 0 0 15px var(--main); border-color: var(--main); background: rgba(0, 255, 136, 0.2); }
             50% { transform: scale(1.05); box-shadow: 0 0 30px var(--main), inset 0 0 10px var(--main); background: rgba(0, 255, 136, 0.1); }
             100% { transform: scale(1); box-shadow: 0 4px 15px rgba(0,0,0,0.2); border-color: var(--card-border); background: var(--card-bg); }
         }
 
-        .name { font-weight: bold; font-size: 1rem; display: block; color: #fff; pointer-events: none; letter-spacing: 0.5px; }
-        .tag { font-size: 1.3rem; margin-top: 10px; display: block; pointer-events: none; filter: drop-shadow(0 2px 4px rgba(0,0,0,0.5)); }
+        /* 3열 배치를 위해 폰트 사이즈 살짝 조정 */
+        .name { font-weight: bold; font-size: 0.95rem; display: block; color: #fff; pointer-events: none; letter-spacing: 0.5px; word-break: keep-all; }
+        .tag { font-size: 1.2rem; margin-top: 8px; display: block; pointer-events: none; filter: drop-shadow(0 2px 4px rgba(0,0,0,0.5)); }
     </style>
 </head>
 <body>
@@ -245,7 +247,6 @@
     </div>
 
     <script>
-        // --- 1. 초성 추출 함수 ---
         const choBase = ['ㄱ','ㄲ','ㄴ','ㄷ','ㄸ','ㄹ','ㅁ','ㅂ','ㅃ','ㅅ','ㅆ','ㅇ','ㅈ','ㅉ','ㅊ','ㅋ','ㅌ','ㅍ','ㅎ'];
         function getCho(str) {
             const charCode = str.charCodeAt(0) - 0xAC00;
@@ -253,7 +254,6 @@
             return choBase[Math.floor(charCode / 588)];
         }
 
-        // --- 2. 카드 필터링 및 카운트 업데이트 ---
         function updateDisplay(targetCho) {
             const cards = document.querySelectorAll('.card');
             let visibleCount = 0;
@@ -272,7 +272,6 @@
             document.getElementById('friendCount').innerText = visibleCount;
         }
 
-        // 필터 버튼 클릭 이벤트 연결
         document.querySelectorAll('.filter-btn').forEach(btn => {
             btn.addEventListener('click', function() {
                 document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
@@ -281,25 +280,20 @@
             });
         });
 
-        // --- 3. 네온 클릭 효과 & 이스터에그 ---
         document.querySelectorAll('.card').forEach(card => {
             let clickCount = 0;
             let clickTimer;
 
             card.addEventListener('click', function(e) {
-                // [네온 클릭 애니메이션 실행]
-                // 애니메이션 재실행을 위한 클래스 초기화 꼼수(reflow)
                 card.classList.remove('neon-pulse');
                 void card.offsetWidth; 
                 card.classList.add('neon-pulse');
 
-                // [연속 클릭 이스터에그]
                 clickCount++;
                 clearTimeout(clickTimer);
                 
                 clickTimer = setTimeout(() => { clickCount = 0; }, 1000); 
 
-                // 5번 연속 클릭하면 이모지 폭죽 팡!
                 if (clickCount >= 5) {
                     const emoji = card.querySelector('.tag').innerText;
                     burstEmoji(e.clientX, e.clientY, emoji);
@@ -308,7 +302,6 @@
             });
         });
 
-        // 폭죽 이스터에그 함수
         function burstEmoji(x, y, emoji) {
             for(let i = 0; i < 12; i++) {
                 const el = document.createElement('div');
@@ -338,7 +331,6 @@
             }
         }
 
-        // 페이지 시작할 때 전체 카운트 계산
         window.onload = () => updateDisplay('전체');
     </script>
 </body>
