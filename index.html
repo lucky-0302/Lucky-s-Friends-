@@ -6,19 +6,19 @@
     <title>Lucky's Friends!</title>
     <style>
         :root { --main: #00ff88; --bg: #121212; --card: #1e1e1e; }
-        body { background: var(--bg); color: white; font-family: sans-serif; margin: 0; padding: 20px; text-align: center; }
+        body { background: var(--bg); color: white; font-family: 'Pretendard', sans-serif; margin: 0; padding: 20px; text-align: center; }
         header { padding: 40px 0; border-bottom: 1px solid #333; }
-        h1 { color: var(--main); margin: 0; font-size: 2rem; }
-        .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(130px, 1fr)); gap: 12px; margin-top: 30px; }
-        .card { background: var(--card); padding: 15px; border-radius: 12px; border: 1px solid #333; }
-        .name { font-weight: bold; font-size: 1.1rem; display: block; }
-        .tag { font-size: 0.8rem; color: var(--main); margin-top: 5px; opacity: 0.8; }
+        h1 { color: var(--main); margin: 0; font-size: 2rem; letter-spacing: -1px; }
+        .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(110px, 1fr)); gap: 10px; margin-top: 30px; }
+        .card { background: var(--card); padding: 15px 10px; border-radius: 12px; border: 1px solid #333; box-shadow: 0 4px 6px rgba(0,0,0,0.3); }
+        .name { font-weight: bold; font-size: 1rem; display: block; color: #fff; }
+        .tag { font-size: 0.7rem; color: var(--main); margin-top: 5px; display: block; opacity: 0.8; }
     </style>
 </head>
 <body>
     <header>
         <h1>🍀 Lucky's Friends!</h1>
-        <p style="color: #888;">우리들의 소중한 기록</p>
+        <p style="color: #888; font-size: 0.9rem;">우리들의 소중한 기록</p>
     </header>
     <div class="grid">
         <div class="card"><span class="name">가째</span><span class="tag">#Member</span></div>
