@@ -15,14 +15,19 @@
         
         * { box-sizing: border-box; }
 
+        html, body {
+            margin: 0; padding: 0; width: 100%;
+        }
+
         body { 
             background-color: var(--bg); 
             color: white; 
             font-family: 'Pretendard', -apple-system, sans-serif; 
-            margin: 0; padding: 20px; text-align: center; 
-            overflow-x: hidden;
+            text-align: center; 
+            /* hidden 대신 clip을 사용해야 모바일 터치 영역 잘림 버그를 막을 수 있습니다 */
+            overflow-x: clip;
             position: relative;
-            min-height: 100vh;
+            min-height: 100dvh;
             cursor: default;
         }
 
@@ -66,7 +71,7 @@
             transition: opacity 0.3s ease;
         }
 
-        header { padding: 20px 0 15px; position: relative; z-index: 10; }
+        header { padding: 40px 20px 15px; position: relative; z-index: 10; }
         h1 { 
             color: var(--main); margin: 0; font-size: 2.2rem; font-weight: 900; 
             text-shadow: 0 0 25px rgba(0, 255, 136, 0.5); letter-spacing: -0.5px; 
@@ -75,7 +80,6 @@
         .stats-container {
             display: flex; justify-content: center; gap: 15px; margin: 25px auto;
             max-width: 450px; background: rgba(255, 255, 255, 0.02);
-            backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
             padding: 18px; border-radius: 20px; border: 1px solid var(--card-border);
             box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4), inset 0 1px 0 rgba(255,255,255,0.1);
         }
@@ -84,32 +88,19 @@
         .stat-label { font-size: 0.75rem; color: #8892b0; margin-top: 5px; display: block; text-transform: uppercase; letter-spacing: 1px; }
         #friendCount { color: var(--main); text-shadow: 0 0 15px rgba(0, 255, 136, 0.5); }
 
-        /* ✨ 예쁜 네온 검색창 디자인 */
+        /* 검색창 디자인 */
         .search-container {
-            max-width: 380px;
-            width: 100%;
-            margin: 0 auto 25px;
-            position: relative;
+            max-width: 380px; width: 100%; margin: 0 auto 25px; position: relative;
         }
         #searchInput {
-            width: 100%;
-            padding: 14px 20px 14px 45px;
-            border-radius: 30px;
-            background: rgba(255, 255, 255, 0.04);
-            border: 1px solid var(--card-border);
-            color: white;
-            font-size: 1rem;
-            font-family: inherit;
-            outline: none;
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
-            transition: all 0.3s ease;
-            box-shadow: inset 0 2px 5px rgba(0,0,0,0.2);
+            width: 100%; padding: 14px 20px 14px 45px; border-radius: 30px;
+            background: rgba(255, 255, 255, 0.04); border: 1px solid var(--card-border);
+            color: white; font-size: 1rem; font-family: inherit; outline: none;
+            transition: all 0.3s ease; box-shadow: inset 0 2px 5px rgba(0,0,0,0.2);
         }
         #searchInput::placeholder { color: #6b7280; font-weight: 500; }
         #searchInput:focus {
-            border-color: var(--main);
-            background: rgba(255, 255, 255, 0.08);
+            border-color: var(--main); background: rgba(255, 255, 255, 0.08);
             box-shadow: 0 0 20px rgba(0, 255, 136, 0.2), inset 0 2px 5px rgba(0,0,0,0.2);
         }
         .search-icon {
@@ -117,7 +108,7 @@
             font-size: 1.1rem; pointer-events: none; opacity: 0.6;
         }
 
-        /* ✨ 필터 버튼 깔끔한 정렬 */
+        /* 필터 버튼 정렬 */
         .filter-container { 
             display: flex; flex-wrap: wrap; justify-content: center; gap: 8px; 
             max-width: 700px; margin: 0 auto 35px; position: relative; z-index: 10; 
@@ -126,7 +117,6 @@
             background: var(--card-bg); border: 1px solid var(--card-border); color: #8892b0; 
             padding: 8px 18px; border-radius: 20px; font-size: 0.95rem; font-weight: 600; cursor: pointer; 
             transition: all 0.3s cubic-bezier(0.25, 1, 0.5, 1);
-            backdrop-filter: blur(5px); -webkit-backdrop-filter: blur(5px);
         }
         .filter-btn:hover { border-color: rgba(0, 255, 136, 0.5); color: white; transform: translateY(-2px); box-shadow: 0 5px 10px rgba(0,0,0,0.2); }
         .filter-btn.active { 
@@ -134,30 +124,30 @@
             border-color: var(--main); box-shadow: 0 0 15px rgba(0,255,136,0.3); 
         }
 
-        /* ✨ 반응형 그리드 (카드 크기 유지하며 자동 줄바꿈) */
+        /* 반응형 그리드 */
         .grid { 
             display: grid; 
             grid-template-columns: repeat(auto-fill, minmax(110px, 1fr)); 
             gap: 15px; 
             max-width: 900px;
             margin: 0 auto 50px auto;
+            padding: 0 20px;
             position: relative; 
             z-index: 5; 
         }
         
-        /* ✨ 심플하고 세련된 카드 디자인 (3D 제거) */
+        /* 심플하고 세련된 카드 (버벅임의 주원인이던 backdrop-filter 제거) */
         .card { 
-            background: linear-gradient(145deg, rgba(255,255,255,0.06) 0%, rgba(255,255,255,0.01) 100%);
+            background: linear-gradient(145deg, rgba(255,255,255,0.08) 0%, rgba(255,255,255,0.02) 100%);
             padding: 22px 10px; border-radius: 18px; 
             border: 1px solid var(--card-border); 
-            backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
             box-shadow: 0 4px 15px rgba(0,0,0,0.2); 
             cursor: pointer; position: relative;
             user-select: none; -webkit-tap-highlight-color: transparent;
             transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
         }
         .card:hover { 
-            transform: translateY(-5px); /* 마우스 올렸을 때 살짝 위로 떠오르는 깔끔한 효과 */
+            transform: translateY(-5px);
             border-color: rgba(0, 255, 136, 0.4); 
             box-shadow: 0 10px 25px rgba(0, 255, 136, 0.15), 0 5px 15px rgba(0,0,0,0.3);
         }
@@ -169,7 +159,7 @@
             100% { opacity: 1; transform: translateY(0) scale(1); }
         }
 
-        /* 클릭 시 네온 파동 (평면 기반으로 수정) */
+        /* 클릭 시 네온 파동 */
         .card.neon-pulse { animation: neon-click-anim 0.5s cubic-bezier(0.25, 1, 0.5, 1) forwards; }
         @keyframes neon-click-anim {
             0% { transform: scale(0.95); box-shadow: 0 0 20px var(--main), inset 0 0 15px var(--main); border-color: var(--main); background: rgba(0, 255, 136, 0.2); }
@@ -184,7 +174,8 @@
         }
         .tag { 
             font-size: 1.6rem; margin-top: 12px; display: block; pointer-events: none; 
-            filter: drop-shadow(0 4px 6px rgba(0,0,0,0.3));
+            /* drop-shadow 대신 text-shadow 사용으로 렌더링 성능 대폭 개선 */
+            text-shadow: 0 4px 6px rgba(0,0,0,0.3);
             position: relative; z-index: 2;
         }
 
@@ -411,9 +402,9 @@
     </div>
 
     <script>
-        /* 초성 추출 로직 및 오류 수정 (쌍자음 필터링 대응) */
+        /* 초성 추출 로직 및 오류 수정 */
         const choBase = ['ㄱ','ㄲ','ㄴ','ㄷ','ㄸ','ㄹ','ㅁ','ㅂ','ㅃ','ㅅ','ㅆ','ㅇ','ㅈ','ㅉ','ㅊ','ㅋ','ㅌ','ㅍ','ㅎ'];
-        const choMap = {'ㄲ':'ㄱ', 'ㄸ':'ㄷ', 'ㅃ':'ㅂ', 'ㅆ':'ㅅ', 'ㅉ':'ㅈ'}; // UI에 없는 쌍자음을 기본 자음으로 매핑
+        const choMap = {'ㄲ':'ㄱ', 'ㄸ':'ㄷ', 'ㅃ':'ㅂ', 'ㅆ':'ㅅ', 'ㅉ':'ㅈ'}; 
         
         function getCho(str) {
             if (!str) return '';
@@ -423,21 +414,20 @@
             return choMap[cho] || cho; 
         }
 
-        /* 상태 관리 변수 */
         let currentCho = '전체';
         let currentSearch = '';
 
-        /* 1. 카드 랜덤 섞기 함수 */
+        /* 1. 카드 랜덤 섞기 */
         function shuffleCards() {
             const grid = document.getElementById('friendGrid');
             const cards = Array.from(grid.children);
             for (let i = cards.length - 1; i > 0; i--) {
                 const j = Math.floor(Math.random() * (i + 1));
-                grid.appendChild(cards[j]); // DOM 요소를 무작위 위치로 재배치
+                grid.appendChild(cards[j]); 
             }
         }
 
-        /* 2. 통합 필터링 함수 (초성 + 검색어 모두 고려) */
+        /* 2. 필터링 함수 */
         function applyFilters() {
             const cards = document.querySelectorAll('.card');
             let visibleCount = 0;
@@ -447,9 +437,7 @@
                 const name = card.querySelector('.name').innerText;
                 const cardCho = getCho(name);
                 
-                // 초성 조건 검사
                 const matchCho = (currentCho === '전체' || cardCho === currentCho);
-                // 검색어 조건 검사
                 const matchSearch = name.toLowerCase().includes(currentSearch.toLowerCase());
                 
                 card.classList.remove('slide-up');
@@ -469,36 +457,29 @@
             document.getElementById('friendCount').innerText = visibleCount;
         }
 
-        /* 3. 검색창 입력 이벤트 */
+        /* 3. 이벤트 리스너들 */
         document.getElementById('searchInput').addEventListener('input', function(e) {
             currentSearch = e.target.value.trim();
-            
-            // 검색어를 입력하면 초성 버튼은 '전체'로 자동 전환되어 직관적인 UX 제공
             if (currentSearch !== '') {
                 document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
                 document.querySelector('.filter-btn[data-cho="전체"]').classList.add('active');
                 currentCho = '전체';
             }
-            
             applyFilters();
         });
 
-        /* 초성 필터 버튼 클릭 이벤트 */
         document.querySelectorAll('.filter-btn').forEach(btn => {
             btn.addEventListener('click', function() {
                 document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
                 this.classList.add('active');
-                
-                // 초성 버튼을 누르면 검색창을 비워서 충돌을 방지함
                 document.getElementById('searchInput').value = '';
                 currentSearch = '';
                 currentCho = this.getAttribute('data-cho');
-                
                 applyFilters();
             });
         });
 
-        /* 카드 상호작용 (Tilt 제거 후 클릭 효과만 유지) */
+        /* 4. 카드 상호작용 (네온 파동 & 이모지 폭발) */
         document.querySelectorAll('.card').forEach(card => {
             let clickCount = 0;
             let clickTimer;
@@ -520,7 +501,6 @@
             });
         });
 
-        /* 이모지 폭발 애니메이션 */
         function burstEmoji(x, y, emoji) {
             for(let i = 0; i < 12; i++) {
                 const el = document.createElement('div');
@@ -531,7 +511,7 @@
                 el.style.fontSize = '2.5rem';
                 el.style.pointerEvents = 'none';
                 el.style.zIndex = 9999;
-                el.style.filter = 'drop-shadow(0 0 10px rgba(255,255,255,0.5))';
+                el.style.textShadow = '0 0 10px rgba(255,255,255,0.5)';
                 document.body.appendChild(el);
 
                 const angle = Math.random() * Math.PI * 2;
@@ -551,7 +531,7 @@
             }
         }
 
-        /* 마우스/터치 위치를 따라다니는 네온 조명 */
+        /* 5. 마우스/터치 네온 조명 */
         const glowCursor = document.getElementById('cursor-glow');
         function updateGlowPosition(clientX, clientY) {
             glowCursor.style.transform = `translate(${clientX}px, ${clientY}px) translate(-50%, -50%)`;
@@ -565,9 +545,9 @@
             if(e.touches.length > 0) {
                 updateGlowPosition(e.touches[0].clientX, e.touches[0].clientY);
             }
-        }, { passive: true });
+        }, { passive: true }); // <--- 잘려있던 부분 수정 완료!
 
-        /* 페이지 로드 시 실행 (셔플 후 렌더링) */
+        /* 페이지 로드 시 초기화 실행 */
         window.onload = () => {
             shuffleCards();
             applyFilters();
