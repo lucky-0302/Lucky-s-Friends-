@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Lucky's Friends!</title>
     <style>
-        :root { --main: #00ff88; --bg: #0a0a0a; --card: #161616; }
+        :root { --main: #00ff88; --bg: #0a0a0a; --card: #161616; --ripple: rgba(0, 255, 136, 0.4); }
         
         body { 
             background: var(--bg); color: white; font-family: 'Pretendard', sans-serif; 
@@ -13,16 +13,23 @@
             position: relative;
         }
 
-        /* 배경 애니메이션 */
+        /* 🌧️ 배경 애니메이션: 선명한 초록색 디지털 비 효과 */
         body::before {
-            content: ""; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background: radial-gradient(circle at center, transparent 0%, var(--bg) 100%),
-                        url('https://www.transparenttextures.com/patterns/stardust.png');
-            opacity: 0.3; z-index: -1; animation: moveBg 50s linear infinite;
+            content: ""; position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
+            background-image: 
+                linear-gradient(rgba(0,255,136,0) 0%, rgba(0,255,136,0.3) 50%, rgba(0,255,136,0) 100%),
+                linear-gradient(rgba(0,255,136,0) 0%, rgba(0,255,136,0.15) 50%, rgba(0,255,136,0) 100%);
+            background-size: 3px 100px, 1px 150px;
+            background-position: 0 0, 50px 50px;
+            opacity: 0.6; z-index: -1; pointer-events: none;
+            animation: rain 0.4s linear infinite;
         }
-        @keyframes moveBg { from { background-position: 0 0; } to { background-position: 0 1000px; } }
+        @keyframes rain {
+            0% { background-position: 0 0, 50px 50px; }
+            100% { background-position: 0 800px, 50px 1200px; }
+        }
 
-        header { padding: 40px 0; }
+        header { padding: 30px 0; }
         h1 { color: var(--main); margin: 0; font-size: 2.2rem; text-shadow: 0 0 15px rgba(0, 255, 136, 0.5); }
 
         .stats-container {
@@ -31,27 +38,44 @@
             padding: 15px; border-radius: 15px; border: 1px solid #333;
         }
         .stat-item { flex: 1; }
-        /* 숫자가 들어갈 자리에 ID(friendCount)를 줬어요 */
         .stat-value { display: block; font-size: 1.5rem; font-weight: bold; color: var(--main); }
         .stat-label { font-size: 0.8rem; color: #888; }
 
-        .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(100px, 1fr)); gap: 10px; margin-top: 30px; position: relative; }
+        /* 🔍 초성 필터 버튼 스타일 */
+        .filter-container { display: flex; flex-wrap: wrap; justify-content: center; gap: 8px; max-width: 800px; margin: 0 auto 20px; }
+        .filter-btn {
+            background: var(--card); border: 1px solid #333; color: #aaa; padding: 6px 12px;
+            border-radius: 8px; font-size: 0.9rem; cursor: pointer; transition: 0.2s;
+        }
+        .filter-btn:hover { border-color: var(--main); color: white; }
+        .filter-btn.active { background: var(--main); color: #000; font-weight: bold; border-color: var(--main); box-shadow: 0 0 10px rgba(0,255,136,0.5); }
+
+        .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(100px, 1fr)); gap: 10px; position: relative; }
         
+        /* 🌊 카드 및 파동 스타일 */
         .card { 
             background: var(--card); padding: 15px 5px; border-radius: 12px; border: 1px solid #333; 
-            box-shadow: 0 4px 6px rgba(0,0,0,0.3); transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1); 
-            cursor: pointer; backdrop-filter: blur(5px);
+            box-shadow: 0 4px 6px rgba(0,0,0,0.3); transition: transform 0.2s, border-color 0.2s; 
+            cursor: pointer; position: relative; overflow: hidden; /* 파동이 안 넘치게 */
+            user-select: none; -webkit-tap-highlight-color: transparent;
         }
-        .card:hover { transform: translateY(-5px); border-color: var(--main); box-shadow: 0 5px 15px rgba(0, 255, 136, 0.3); }
-        .card:active { transform: scale(0.92); background: rgba(0, 255, 136, 0.1); border-color: var(--main); box-shadow: 0 0 20px var(--main); }
+        .card:hover { transform: translateY(-5px); border-color: var(--main); }
+        
+        /* 클릭 파동 애니메이션 */
+        .ripple {
+            position: absolute; border-radius: 50%; background: var(--ripple);
+            transform: scale(0); animation: ripple-anim 0.6s linear; pointer-events: none;
+            width: 20px; height: 20px; margin-top: -10px; margin-left: -10px;
+        }
+        @keyframes ripple-anim { to { transform: scale(15); opacity: 0; } }
 
-        .name { font-weight: bold; font-size: 0.95rem; display: block; color: #fff; }
-        .tag { font-size: 1.1rem; margin-top: 8px; display: block; }
+        .name { font-weight: bold; font-size: 0.95rem; display: block; color: #fff; pointer-events: none; }
+        .tag { font-size: 1.1rem; margin-top: 8px; display: block; pointer-events: none; }
     </style>
 </head>
 <body>
     <header>
-        <h1>Lucky's Friends!🍀</h1>
+        <h1>🍀 Lucky's Friends!</h1>
         
         <div class="stats-container">
             <div class="stat-item">
@@ -63,9 +87,27 @@
                 <span class="stat-label">24/7 Active</span>
             </div>
             <div class="stat-item">
-                <span class="stat-value" id="updateDate">V1.5</span>
+                <span class="stat-value" id="updateDate">V1.6</span>
                 <span class="stat-label">Version</span>
             </div>
+        </div>
+
+        <div class="filter-container" id="filterBox">
+            <button class="filter-btn active" data-cho="전체">전체</button>
+            <button class="filter-btn" data-cho="ㄱ">ㄱ</button>
+            <button class="filter-btn" data-cho="ㄴ">ㄴ</button>
+            <button class="filter-btn" data-cho="ㄷ">ㄷ</button>
+            <button class="filter-btn" data-cho="ㄹ">ㄹ</button>
+            <button class="filter-btn" data-cho="ㅁ">ㅁ</button>
+            <button class="filter-btn" data-cho="ㅂ">ㅂ</button>
+            <button class="filter-btn" data-cho="ㅅ">ㅅ</button>
+            <button class="filter-btn" data-cho="ㅇ">ㅇ</button>
+            <button class="filter-btn" data-cho="ㅈ">ㅈ</button>
+            <button class="filter-btn" data-cho="ㅊ">ㅊ</button>
+            <button class="filter-btn" data-cho="ㅋ">ㅋ</button>
+            <button class="filter-btn" data-cho="ㅌ">ㅌ</button>
+            <button class="filter-btn" data-cho="ㅍ">ㅍ</button>
+            <button class="filter-btn" data-cho="ㅎ">ㅎ</button>
         </div>
     </header>
 
@@ -176,12 +218,114 @@
     </div>
 
     <script>
-        function updateStats() {
-            const count = document.querySelectorAll('.card').length;
-            document.getElementById('friendCount').innerText = count;
+        // --- 1. 초성 추출 함수 ---
+        const choBase = ['ㄱ','ㄲ','ㄴ','ㄷ','ㄸ','ㄹ','ㅁ','ㅂ','ㅃ','ㅅ','ㅆ','ㅇ','ㅈ','ㅉ','ㅊ','ㅋ','ㅌ','ㅍ','ㅎ'];
+        function getCho(str) {
+            const charCode = str.charCodeAt(0) - 0xAC00;
+            if (charCode < 0 || charCode > 11171) return str.charAt(0); // 한글이 아니면 그대로 반환
+            return choBase[Math.floor(charCode / 588)];
         }
-        // 페이지가 로드될 때 실행
-        window.onload = updateStats;
+
+        // --- 2. 카드 필터링 및 카운트 업데이트 ---
+        function updateDisplay(targetCho) {
+            const cards = document.querySelectorAll('.card');
+            let visibleCount = 0;
+
+            cards.forEach(card => {
+                const name = card.querySelector('.name').innerText;
+                const cardCho = getCho(name);
+                
+                if (targetCho === '전체' || cardCho === targetCho) {
+                    card.style.display = 'block';
+                    visibleCount++;
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+            document.getElementById('friendCount').innerText = visibleCount;
+        }
+
+        // 필터 버튼 클릭 이벤트 연결
+        document.querySelectorAll('.filter-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                // 버튼 색상 변경
+                document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+                this.classList.add('active');
+                
+                // 필터 적용
+                updateDisplay(this.getAttribute('data-cho'));
+            });
+        });
+
+        // --- 3. 카드 클릭 파동 & 이스터에그 ---
+        document.querySelectorAll('.card').forEach(card => {
+            let clickCount = 0;
+            let clickTimer;
+
+            card.addEventListener('click', function(e) {
+                // [파동 효과 만들기]
+                const ripple = document.createElement('div');
+                ripple.classList.add('ripple');
+                
+                // 클릭한 좌표에 파동 생성
+                const rect = card.getBoundingClientRect();
+                ripple.style.left = `${e.clientX - rect.left}px`;
+                ripple.style.top = `${e.clientY - rect.top}px`;
+                card.appendChild(ripple);
+                
+                // 애니메이션 끝나면 지우기
+                setTimeout(() => ripple.remove(), 600);
+
+                // [연속 클릭 이스터에그]
+                clickCount++;
+                clearTimeout(clickTimer);
+                
+                // 1초 안에 다시 안 누르면 초기화
+                clickTimer = setTimeout(() => { clickCount = 0; }, 1000); 
+
+                // 5번 연속 클릭하면 이모지 폭죽 팡!
+                if (clickCount >= 5) {
+                    const emoji = card.querySelector('.tag').innerText;
+                    burstEmoji(e.clientX, e.clientY, emoji);
+                    clickCount = 0; // 초기화
+                }
+            });
+        });
+
+        // 폭죽 이스터에그 함수
+        function burstEmoji(x, y, emoji) {
+            for(let i = 0; i < 12; i++) {
+                const el = document.createElement('div');
+                el.innerText = emoji;
+                el.style.position = 'fixed';
+                el.style.left = x + 'px';
+                el.style.top = y + 'px';
+                el.style.fontSize = '2rem';
+                el.style.pointerEvents = 'none';
+                el.style.zIndex = 9999;
+                document.body.appendChild(el);
+
+                // 사방으로 퍼지는 애니메이션 수학 계산
+                const angle = Math.random() * Math.PI * 2;
+                const velocity = 60 + Math.random() * 100;
+                const tx = Math.cos(angle) * velocity;
+                const ty = Math.sin(angle) * velocity - 50; 
+
+                el.animate([
+                    { transform: 'translate(-50%, -50%) scale(1)', opacity: 1 },
+                    { transform: `translate(calc(-50% + ${tx}px), calc(-50% + ${ty}px)) scale(1.5) rotate(${Math.random()*360}deg)`, opacity: 0 }
+                ], { 
+                    duration: 800 + Math.random() * 400, 
+                    easing: 'ease-out' 
+                });
+
+                // 애니메이션 후 삭제
+                setTimeout(() => el.remove(), 1200);
+            }
+        }
+
+        // 페이지 시작할 때 전체 카운트 계산
+        window.onload = () => updateDisplay('전체');
     </script>
 </body>
 </html>
