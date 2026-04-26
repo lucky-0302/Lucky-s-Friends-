@@ -10,71 +10,72 @@
         header { padding: 40px 0; border-bottom: 1px solid #333; }
         h1 { color: var(--main); margin: 0; font-size: 2rem; letter-spacing: -1px; }
         .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(110px, 1fr)); gap: 10px; margin-top: 30px; }
-        .card { background: var(--card); padding: 15px 10px; border-radius: 12px; border: 1px solid #333; box-shadow: 0 4px 6px rgba(0,0,0,0.3); }
+        .card { background: var(--card); padding: 15px 10px; border-radius: 12px; border: 1px solid #333; box-shadow: 0 4px 6px rgba(0,0,0,0.3); transition: transform 0.2s; }
+        .card:hover { transform: translateY(-5px); border-color: var(--main); }
         .name { font-weight: bold; font-size: 1rem; display: block; color: #fff; }
-        .tag { font-size: 0.7rem; color: var(--main); margin-top: 5px; display: block; opacity: 0.8; }
+        .tag { font-size: 1.1rem; margin-top: 8px; display: block; }
     </style>
 </head>
 <body>
     <header>
-        <h1>🍀 Lucky's Friends!</h1>
-        <p style="color: #888; font-size: 0.9rem;">우리들의 소중한 기록</p>
+        <h1>🍀Lucky's Friends!🍀</h1>
+        <p style="color: #888; font-size: 0.9rem;">짱짱럭키의 지인들입니다!</p>
     </header>
     <div class="grid">
-        <div class="card"><span class="name">가째</span><span class="tag">#Member</span></div>
-        <div class="card"><span class="name">강우</span><span class="tag">#Member</span></div>
-        <div class="card"><span class="name">강평</span><span class="tag">#Member</span></div>
-        <div class="card"><span class="name">고양사</span><span class="tag">#Member</span></div>
-        <div class="card"><span class="name">공백</span><span class="tag">#Member</span></div>
-        <div class="card"><span class="name">냥린이</span><span class="tag">#Member</span></div>
-        <div class="card"><span class="name">냥코</span><span class="tag">#Member</span></div>
-        <div class="card"><span class="name">네코</span><span class="tag">#Member</span></div>
-        <div class="card"><span class="name">델타</span><span class="tag">#Member</span></div>
-        <div class="card"><span class="name">드럼통</span><span class="tag">#Member</span></div>
-        <div class="card"><span class="name">라떼</span><span class="tag">#Member</span></div>
-        <div class="card"><span class="name">로아</span><span class="tag">#Member</span></div>
-        <div class="card"><span class="name">료운</span><span class="tag">#Member</span></div>
-        <div class="card"><span class="name">루비</span><span class="tag">#Member</span></div>
-        <div class="card"><span class="name">마린</span><span class="tag">#Member</span></div>
-        <div class="card"><span class="name">멜짱</span><span class="tag">#Member</span></div>
-        <div class="card"><span class="name">모지</span><span class="tag">#Member</span></div>
-        <div class="card"><span class="name">미카</span><span class="tag">#Member</span></div>
-        <div class="card"><span class="name">백지</span><span class="tag">#Member</span></div>
-        <div class="card"><span class="name">백포노</span><span class="tag">#Member</span></div>
-        <div class="card"><span class="name">병아리</span><span class="tag">#Member</span></div>
-        <div class="card"><span class="name">비즈</span><span class="tag">#Member</span></div>
-        <div class="card"><span class="name">사람</span><span class="tag">#Member</span></div>
-        <div class="card"><span class="name">샤크</span><span class="tag">#Member</span></div>
-        <div class="card"><span class="name">서아</span><span class="tag">#Member</span></div>
-        <div class="card"><span class="name">서윤</span><span class="tag">#Member</span></div>
-        <div class="card"><span class="name">세나</span><span class="tag">#Member</span></div>
-        <div class="card"><span class="name">시원</span><span class="tag">#Member</span></div>
-        <div class="card"><span class="name">스노</span><span class="tag">#Member</span></div>
-        <div class="card"><span class="name">슬리</span><span class="tag">#Member</span></div>
-        <div class="card"><span class="name">시아</span><span class="tag">#Member</span></div>
-        <div class="card"><span class="name">시온</span><span class="tag">#Member</span></div>
-        <div class="card"><span class="name">시엘</span><span class="tag">#Member</span></div>
-        <div class="card"><span class="name">아리</span><span class="tag">#Member</span></div>
-        <div class="card"><span class="name">아키</span><span class="tag">#Member</span></div>
-        <div class="card"><span class="name">엘릿</span><span class="tag">#Member</span></div>
-        <div class="card"><span class="name">여름</span><span class="tag">#Member</span></div>
-        <div class="card"><span class="name">유주</span><span class="tag">#Member</span></div>
-        <div class="card"><span class="name">은우</span><span class="tag">#Member</span></div>
-        <div class="card"><span class="name">잔나비</span><span class="tag">#Member</span></div>
-        <div class="card"><span class="name">제논</span><span class="tag">#Member</span></div>
-        <div class="card"><span class="name">정우</span><span class="tag">#Member</span></div>
-        <div class="card"><span class="name">지안</span><span class="tag">#Member</span></div>
-        <div class="card"><span class="name">채영</span><span class="tag">#Member</span></div>
-        <div class="card"><span class="name">태오</span><span class="tag">#Member</span></div>
-        <div class="card"><span class="name">테라피</span><span class="tag">#Member</span></div>
-        <div class="card"><span class="name">팩맨</span><span class="tag">#Member</span></div>
-        <div class="card"><span class="name">핑크</span><span class="tag">#Member</span></div>
-        <div class="card"><span class="name">하린</span><span class="tag">#Member</span></div>
-        <div class="card"><span class="name">하준</span><span class="tag">#Member</span></div>
-        <div class="card"><span class="name">혜린</span><span class="tag">#Member</span></div>
-        <div class="card"><span class="name">혀니</span><span class="tag">#Member</span></div>
-        <div class="card"><span class="name">흑우</span><span class="tag">#Member</span></div>
-        <div class="card"><span class="name">흑타냥</span><span class="tag">#Member</span></div>
+        <div class="card"><span class="name">가째</span><span class="tag">😎</span></div>
+        <div class="card"><span class="name">강우</span><span class="tag">🔥</span></div>
+        <div class="card"><span class="name">강평</span><span class="tag">🎮</span></div>
+        <div class="card"><span class="name">고양사</span><span class="tag">🐱</span></div>
+        <div class="card"><span class="name">공백</span><span class="tag">☁️</span></div>
+        <div class="card"><span class="name">냥린이</span><span class="tag">🐾</span></div>
+        <div class="card"><span class="name">냥코</span><span class="tag">🐈‍⬛</span></div>
+        <div class="card"><span class="name">네코</span><span class="tag">🍙</span></div>
+        <div class="card"><span class="name">델타</span><span class="tag">⚡</span></div>
+        <div class="card"><span class="name">드럼통</span><span class="tag">🛢️</span></div>
+        <div class="card"><span class="name">라떼</span><span class="tag">☕</span></div>
+        <div class="card"><span class="name">로아</span><span class="tag">💎</span></div>
+        <div class="card"><span class="name">료운</span><span class="tag">🌌</span></div>
+        <div class="card"><span class="name">루비</span><span class="tag">🍎</span></div>
+        <div class="card"><span class="name">마린</span><span class="tag">⚓</span></div>
+        <div class="card"><span class="name">멜짱</span><span class="tag">🍬</span></div>
+        <div class="card"><span class="name">모지</span><span class="tag">🍡</span></div>
+        <div class="card"><span class="name">미카</span><span class="tag">🏹</span></div>
+        <div class="card"><span class="name">백지</span><span class="tag">📄</span></div>
+        <div class="card"><span class="name">백포노</span><span class="tag">✨</span></div>
+        <div class="card"><span class="name">병아리</span><span class="tag">🐥</span></div>
+        <div class="card"><span class="name">비즈</span><span class="tag">🔮</span></div>
+        <div class="card"><span class="name">사람</span><span class="tag">👤</span></div>
+        <div class="card"><span class="name">샤크</span><span class="tag">🦈</span></div>
+        <div class="card"><span class="name">서아</span><span class="tag">🎀</span></div>
+        <div class="card"><span class="name">서윤</span><span class="tag">🌸</span></div>
+        <div class="card"><span class="name">세나</span><span class="tag">🌙</span></div>
+        <div class="card"><span class="name">시원</span><span class="tag">🌊</span></div>
+        <div class="card"><span class="name">스노</span><span class="tag">❄️</span></div>
+        <div class="card"><span class="name">슬리</span><span class="tag">💤</span></div>
+        <div class="card"><span class="name">시아</span><span class="tag">🍭</span></div>
+        <div class="card"><span class="name">시온</span><span class="tag">☄️</span></div>
+        <div class="card"><span class="name">시엘</span><span class="tag">🕊️</span></div>
+        <div class="card"><span class="name">아리</span><span class="tag">🐥</span></div>
+        <div class="card"><span class="name">아키</span><span class="tag">🍁</span></div>
+        <div class="card"><span class="name">엘릿</span><span class="tag">⭐</span></div>
+        <div class="card"><span class="name">여름</span><span class="tag">☀️</span></div>
+        <div class="card"><span class="name">유주</span><span class="tag">🎵</span></div>
+        <div class="card"><span class="name">은우</span><span class="tag">🧸</span></div>
+        <div class="card"><span class="name">잔나비</span><span class="tag">🐒</span></div>
+        <div class="card"><span class="name">제논</span><span class="tag">🧪</span></div>
+        <div class="card"><span class="name">정우</span><span class="tag">🏀</span></div>
+        <div class="card"><span class="name">지안</span><span class="tag">🍃</span></div>
+        <div class="card"><span class="name">채영</span><span class="tag">🍓</span></div>
+        <div class="card"><span class="name">태오</span><span class="tag">🦁</span></div>
+        <div class="card"><span class="name">테라피</span><span class="tag">🌿</span></div>
+        <div class="card"><span class="name">팩맨</span><span class="tag">🍕</span></div>
+        <div class="card"><span class="name">핑크</span><span class="tag">💖</span></div>
+        <div class="card"><span class="name">하린</span><span class="tag">🐰</span></div>
+        <div class="card"><span class="name">하준</span><span class="tag">🛹</span></div>
+        <div class="card"><span class="name">혜린</span><span class="tag">🌷</span></div>
+        <div class="card"><span class="name">혀니</span><span class="tag">✌️</span></div>
+        <div class="card"><span class="name">흑우</span><span class="tag">🐂</span></div>
+        <div class="card"><span class="name">흑타냥</span><span class="tag">🎩</span></div>
     </div>
 </body>
 </html>
